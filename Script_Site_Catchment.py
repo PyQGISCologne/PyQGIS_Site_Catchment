@@ -10,7 +10,7 @@ import numpy as np
 
 
 from PyQt4.QtGui import QDialog, QFormLayout
-from qgis.gui import (QgsFieldComboBox, QgsMapLayerComboBox, QgsMapLayerProxyModel)
+from qgis.gui import *
 
 qid = QInputDialog()
 
