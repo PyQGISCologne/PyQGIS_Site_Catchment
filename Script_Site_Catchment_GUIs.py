@@ -2,15 +2,11 @@
 # Sara Schiesberg, Sophie Schmidt, Sandra Rung, Kai Vogl
 
 # imports
-#import os
+#import os -- nochmal checken ob wir das brauchen
 import pandas as pd
 import numpy as np
-#from PyQt5.QtGui import *
-#from qgis.core import QgsVectorLayer #Kai fragen, brauchen wir das?
-
-
-from PyQt4.QtGui import QDialog, QFormLayout
-from qgis.gui import (QgsFieldComboBox, QgsMapLayerComboBox, QgsMapLayerProxyModel)
+from PyQt5.QtGui import *
+from qgis.gui import *
 
 qid = QInputDialog()
 
