@@ -2,17 +2,21 @@
 # Puffer; Flächenanteile pro Punkt # 
 #***********************************************************************************************************************************
 
+from qgis.PyQt.QtCore import QVariant
+from qgis.core import QgsVectorFileWriter
+import pandas as pd
+import numpy as np
+
 # Dateneingabe: Pfade
-samp = "./QPy_Site_Catchment/AtlantGIS_data/archaeological_sites.shp"
-land = "./QPy_Site_Catchment/AtlantGIS_data/landtype.shp"
+samp = "INSERT_YOUR_ABSOLUT_PATH_TO_SITES"
+land = "INSERT_YOUR_ABSOLUT_PATH_TO_POLYGON_LAYER"
 
 # Als Karte laden, addVectorLayer() gibt einen QgsVectorLayer aus mit dem man arbeiten kann
 samples = iface.addVectorLayer(samp, "sample", "ogr")
 landuse = iface.addVectorLayer(land, "landuse", "ogr")
 
 # Ein neuer Vektorlayer wird erstellt (ergebnis)
-from qgis.PyQt.QtCore import QVariant
-result = QgsVectorLayer("Point?crs=EPSG:5678", "Result", "memory")
+result = QgsVectorLayer("Point?crs=EPSG:32628", "Result", "memory")
 prov = result.dataProvider()
 
 # Diesem Layer werden variablen hinzugefügt
@@ -56,19 +60,9 @@ bod = result.getFeatures()
 # QgsProject.instance().addMapLayer(result)
 
 # Den Datensatz als csv exportieren
-from qgis.core import QgsVectorFileWriter
-QgsVectorFileWriter.writeAsVectorFormat(result, "./QPy_Site_Catchment/AtlantGIS_data/result.csv","UTF-8", 
+QgsVectorFileWriter.writeAsVectorFormat(result, "YOUR_ABSOLUT_PATH_TO_ESULT_CSV","UTF-8", 
 result.crs(), "CSV")
 
 # Pandas
-import pandas as pd
-import numpy as np
-tabelle = pd.read_csv("./QPy_Site_Catchment/AtlantGIS_data/result.csv")
+tabelle = pd.read_csv("YOUR_ABSOLUT_PATH_TO_ESULT_CSV")
 kreuztabelle = pd.pivot_table (tabelle, values='area%', index=['id'],columns=['obj'], aggfunc=np.sum)
-
-
-
-
-
-
-
