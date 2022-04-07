@@ -1,6 +1,6 @@
 # Title: Site Catchment Analysis - A scripted PyQGIS solution
 # Authors: Sophie Schmidt, Sara Schiesberg, Kai Vogl, Sandra Rung
-# Objective: Takes a point and a polygon layer. Returns a table giving probabilities for polygon types around each point.  
+# Objective: Takes a point and a polygon layer. Returns a table giving percentages for polygon types around each point.  
 
 # Import libraries 
 from qgis.PyQt.QtCore import QVariant
