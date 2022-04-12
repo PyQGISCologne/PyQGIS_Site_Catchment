@@ -28,8 +28,8 @@ fields = prov.fields()
 # Nested loop iterating for every point over all polygons
 feats = []
 for sample in samples.getFeatures():
+    puffer = sample.geometry().buffer(radius, 25) # buffer with 25 segments boundary
     for poly in landuse.getFeatures():
-        puffer = sample.geometry().buffer(radius, 25) # buffer with 25 segments boundary
         part = puffer.intersection(poly.geometry())
         feat = QgsFeature(fields) 
         feat.setGeometry(sample.geometry())
