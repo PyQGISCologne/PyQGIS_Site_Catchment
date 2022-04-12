@@ -3,8 +3,8 @@
 #***********************************************************************************************************************************
 
 # Dateneingabe: Pfade
-samp = "./QPy_Site_Catchment/AtlantGIS_data/archaeological_sites.shp"
-land = "./QPy_Site_Catchment/AtlantGIS_data/landtype.shp"
+samp = "/home/sophie/ownCloud/PyQGIS/P2_Puffer_Daten/QPy_Site_Catchment/AtlantGIS_data/archaeological_sites.shp"
+land = "/home/sophie/ownCloud/PyQGIS/P2_Puffer_Daten/QPy_Site_Catchment/AtlantGIS_data/landtype.shp"
 
 # Als Karte laden, addVectorLayer() gibt einen QgsVectorLayer aus mit dem man arbeiten kann
 samples = iface.addVectorLayer(samp, "sample", "ogr")
@@ -34,13 +34,13 @@ for sample in samples.getFeatures():
         feat = QgsFeature(fields) # es wird ein objekt "qgis._core.QgsFeature" erzeugt 
         feat.setGeometry(sample.geometry()) # den features werden die geometrien der samples zugewiesen
         feat['id'] = sample["ID_AR_SITE"]
-        feat ["obj"] = poly["Landtype"]
+        feat ['obj'] = poly["Landtype"]
         feat['area'] = part.area()
-        if feat ["area"] > 0:
+        if feat['area'] > 0:
             feat['area%'] = (part.area())/(puffer.area())
             feats.append(feat)
-
 prov.addFeatures(feats) # hier wird dem provider des result-layers die daten zugewiesen
+
 QgsProject.instance().addMapLayer(result)
 
 # Alle leeren Zeilen löschen
@@ -57,18 +57,12 @@ bod = result.getFeatures()
 
 # Den Datensatz als csv exportieren
 from qgis.core import QgsVectorFileWriter
-QgsVectorFileWriter.writeAsVectorFormat(result, "./QPy_Site_Catchment/AtlantGIS_data/result.csv","UTF-8", 
+QgsVectorFileWriter.writeAsVectorFormat(result, "/home/sophie/ownCloud/PyQGIS/P2_Puffer_Daten/QPy_Site_Catchment/AtlantGIS_data/result.csv","UTF-8", 
 result.crs(), "CSV")
 
 # Pandas
 import pandas as pd
 import numpy as np
-tabelle = pd.read_csv("./QPy_Site_Catchment/AtlantGIS_data/result.csv")
+tabelle = pd.read_csv("/home/sophie/ownCloud/PyQGIS/P2_Puffer_Daten/QPy_Site_Catchment/AtlantGIS_data/result.csv")
 kreuztabelle = pd.pivot_table (tabelle, values='area%', index=['id'],columns=['obj'], aggfunc=np.sum)
-
-
-
-
-
-
 
