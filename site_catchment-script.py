@@ -19,7 +19,7 @@ landuse = iface.addVectorLayer(land, 'landuse', 'ogr')
 samples = iface.addVectorLayer(samp, 'sample', 'ogr')
 
 # Create a new layer for results
-result = QgsVectorLayer('Point?crs=EPSG:32628', 'Result', 'memory')
+result = QgsVectorLayer('Point?crs=' + samples.crs().authid(), 'Result', 'memory')
 prov = result.dataProvider()
 prov.addAttributes([QgsField('id', QVariant.Int), QgsField('obj', QVariant.String), QgsField('area', QVariant.Double), QgsField('area%', QVariant.Double)])
 result.updateFields()
