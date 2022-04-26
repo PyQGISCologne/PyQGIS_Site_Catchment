@@ -19,7 +19,7 @@ landuse = iface.addVectorLayer(land, 'landuse', 'ogr')
 samples = iface.addVectorLayer(samp, 'sample', 'ogr')
 
 # Create a new layer for results
-result = QgsVectorLayer('Point?crs=EPSG:32628', 'Result', 'memory')
+result = QgsVectorLayer('Point?crs=' + samples.crs().authid(), 'Result', 'memory')
 prov = result.dataProvider()
 prov.addAttributes([QgsField('id', QVariant.Int), QgsField('obj', QVariant.String), QgsField('area', QVariant.Double), QgsField('area%', QVariant.Double)])
 result.updateFields()
@@ -28,8 +28,8 @@ fields = prov.fields()
 # Nested loop iterating for every point over all polygons
 feats = []
 for sample in samples.getFeatures():
+    puffer = sample.geometry().buffer(radius, 25) # buffer with 25 segments boundary
     for poly in landuse.getFeatures():
-        puffer = sample.geometry().buffer(radius, 25) # buffer with 25 segments boundary
         part = puffer.intersection(poly.geometry())
         feat = QgsFeature(fields) 
         feat.setGeometry(sample.geometry())
