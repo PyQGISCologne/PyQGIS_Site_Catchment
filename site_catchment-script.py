@@ -1,5 +1,6 @@
 # Title: Site Catchment Analysis - A scripted PyQGIS solution
 # Authors: Sophie Schmidt, Sara Schiesberg, Kai Vogl, Sandra Rung
+# License: MIT (https://opensource.org/licenses/mit-license.php)
 # Objective: Takes a point and a polygon layer. Returns a table giving percentages for polygon types around each point.  
 
 # Import libraries 
@@ -25,7 +26,7 @@ prov.addAttributes([QgsField('id', QVariant.Int), QgsField('obj', QVariant.Strin
 result.updateFields()
 fields = prov.fields()
 
-# Nested loop iterating for every point over all polygons
+# Nested loop iterating for every point over all polygons, inspired by: https://www.researchgate.net/post/How-to-calculate-the-intersected-area-from-a-layer-with-overlapping-buffers-in-qgis , see answer by Detlev Neumann
 feats = []
 for sample in samples.getFeatures():
     puffer = sample.geometry().buffer(radius, 25) # buffer with 25 segments boundary
