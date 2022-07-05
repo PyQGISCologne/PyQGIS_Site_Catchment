@@ -13,7 +13,7 @@ land_id = 'INSERT_ID´S NAME'
 samp = 'INSERT_YOUR_ABSOLUT_PATH_TO_POINT_LAYER'
 samp_id = 'INSERT_ID´S NAME'
 output = 'INSERT_YOUR_ABSOLUT_PATH_TO_CSV_LAYER'
-radius = 'INSERT NUMBER'
+radius = 'INSERT NUMBER' # this needs to be a number, therefore don't use ' ' !
 
 # Add point and polygon layers to QGIS
 landuse = iface.addVectorLayer(land, 'landuse', 'ogr')
